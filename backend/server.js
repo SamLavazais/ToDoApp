@@ -4,6 +4,15 @@ const TasksRouter = require("./routes/tasksRoutes");
 
 const app = express();
 
+//Middleware pour gérer les CORS
+app.use((req, res, next) => {
+    // res.setHeader(
+    //     "Access-Control-Allow-Headers",
+    //     "Origin, X-Requested-With, Content-Type, Content, Accept, Authorization"
+    // );
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
+});
 
 //Middleware pour gérer les données au format json et les url encodées (POST & PUT)
 // app.use(express.json());
@@ -24,4 +33,6 @@ app.use("/", (err, req, res, next) => {
     );
 });
 
-app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
+app.listen(process.env.PORT, () =>
+    console.log(`Server running on port ${process.env.PORT}`)
+);
