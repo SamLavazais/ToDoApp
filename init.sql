@@ -1,13 +1,17 @@
 CREATE DATABASE todolist;
+-- SELECT 'CREATE DATABASE mydb'
+-- WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'mydb')\gexec
+
+\connect todolis\t;
 
 CREATE TABLE Tasks
 (
 	id INT Primary key NOT NULL,
-	title VARCHAR,
+	title VARCHAR NOT NULL,
 	completed bool NOT NULL
 );
 
-INSERT INTO tasks (id, title, completed)
+INSERT INTO Tasks (id, title, completed)
 VALUES
 (1, 'Manger', true),
 (2, 'Dormiiiiiir', false),
