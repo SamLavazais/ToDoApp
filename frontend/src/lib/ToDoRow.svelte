@@ -2,8 +2,8 @@
     export let task;
 </script>
 
-<div class="todoRow {task.completed ? 'isDone' : ''}">
-    <input type="checkbox" class="checkBox" bind:checked={task.completed} />
+<div class="todoRow {task.is_completed ? 'isDone' : ''}">
+    <input type="checkbox" class="checkBox" bind:checked={task.is_completed} />
     <div class="todoTitle">{task.title}</div>
     <div class="todoCat">{task.category ?? "categorie"}</div>
     <div class="todoDeadline">{task.deadline ?? "deadline"}</div>

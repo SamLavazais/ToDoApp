@@ -1,22 +1,23 @@
 <script>
+    import TasksList from "../classes/TasksList";
     import ToDoRow from "./ToDoRow.svelte";
     export let filters;
 
-    async function getTasks() {
+    async function getAllTasks() {
         let promise = await fetch("http://localhost:3000/tasks");
         console.log("resp: ", promise);
         let data = await promise.json();
         console.log("données : ", data);
-        return data;
+        console.log(new TasksList(data));
+        return new TasksList(data);
     }
-
-    let promise = getTasks();
+    let promise = getAllTasks();
 </script>
 
 <div id="tasksListBox">
-    {#await promise then tasks}
-        {#each tasks as task}
-            {#if !filters.toDo || (filters.toDo && !task.completed)}
+    {#await promise then tasksList}
+        {#each tasksList.tasks as task}
+            {#if !filters.toDo || (filters.toDo && !task.is_completed)}
                 <ToDoRow {task} />
             {/if}
         {/each}
