@@ -16,7 +16,7 @@
 <div id="tasksListBox">
     {#await promise then tasks}
         {#each tasks as task}
-            {#if (filters.toDo && task.completed) || !filters.toDo}
+            {#if !filters.toDo || (filters.toDo && !task.completed)}
                 <ToDoRow {task} />
             {/if}
         {/each}
