@@ -8,7 +8,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.psql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
     ports:
       - 5432:5432
 
@@ -28,5 +29,5 @@ services:
       - 5173:5173
   
 
-# volumes:
-#   pgdata:
+volumes:
+  pgdata:
