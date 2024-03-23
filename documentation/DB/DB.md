@@ -15,7 +15,6 @@ Properties :
 - Category
 - userId (FK)
 
-
 ## Table : Users (TO CREATE)
 Entity : a user
 Properties :

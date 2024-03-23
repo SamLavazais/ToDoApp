@@ -1,0 +1,11 @@
+-- getAllTasks : obtenir toutes les tâches d'un utilisateur ET les sous-tâches sous forme d'un array
+select
+    tasks.title,
+    COUNT(subtasks.title) AS subtasks_count,
+    JSON_AGG(json_build_object('title', subtasks.title, 'is_completed', subtasks.is_completed)) AS subtasks
+from users
+inner join tasks on tasks.user_id = users.user_id
+inner join subtasks on subtasks.task_id = tasks.task_id
+WHERE users.user_id = 1
+GROUP BY tasks.title;
+-- obtenir le nombre de sous-tâches ?

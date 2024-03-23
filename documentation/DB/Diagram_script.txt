@@ -1,0 +1,28 @@
+## Script pour quickdatabasediagrams.com
+
+Tasks
+-
+task_id int PK
+title string
+category string
+is_completed bool
+deadline date
+is_important bool
+description string
+user_id int FK >- Users.userId
+
+Subtasks
+-
+subtask_id int PK
+title string
+is_completed bool
+task_id int FK >- Tasks.taskId
+
+Users
+-
+user_id int PK
+alias string
+first_name string
+last_name string
+email string
+password hash
