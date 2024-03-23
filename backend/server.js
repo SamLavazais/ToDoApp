@@ -4,6 +4,7 @@ const TasksRouter = require("./routes/tasksRoutes");
 
 const app = express();
 
+//TODO : ajouter une gestion des headers
 //Middleware pour gérer les CORS
 app.use((req, res, next) => {
     // res.setHeader(
@@ -21,18 +22,25 @@ app.use((req, res, next) => {
 // const bodyParser = require("body-parser");
 // app.use(bodyParser.urlencoded({ extended: true }));
 
-//TODO : ajouter une gestion des headers
-
 //TODO ajouter les routes
 app.use("/tasks", TasksRouter);
 
-//TODO : ajouter une gestion des erreurs
-app.use("/", (err, req, res, next) => {
-    res.status(err.statusCode || 500).json(
-        err.message || "Cette route n'existe pas."
-    );
+
+
+// gestion des erreurs
+// en cas de route inexistante :
+app.use((req, res, next) => {
+    next({
+        message: "Cette route n'existe pas",
+        statusCode: 404,
+    });
 });
 
+app.use((err, req, res, next) => {
+    res.status(err.statusCode || 500).json(err.message);
+});
+
+// mettre le serveur en écoute
 app.listen(process.env.PORT, () =>
     console.log(`Server running on port ${process.env.PORT}`)
 );
