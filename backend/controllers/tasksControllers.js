@@ -8,7 +8,6 @@ const db = pgp({
     password: process.env.DB_PASSWORD,
 });
 
-// obtenir la liste des tâches
 const getAllTasks = (req, res, next) => {
     db.any("SELECT * from tasks")
         .then((data) => {
@@ -24,7 +23,6 @@ const getAllTasks = (req, res, next) => {
         });
 };
 
-// créer un seul todo
 const addNewTask = (req, res, next) => {
     const newToDo = req.body;
     // placer les paramètres du body dans la requête //TODO paramétrer le user_id
@@ -54,10 +52,27 @@ const deleteTask = (req, res, next) => {
         .catch((error) => {
             // console.log("ERROR:", error);
             next({
-                message: "Impossible de supprimer le todo (id introuvable).",
+                message: "Impossible de supprimer le todo.",
                 statusCode: 404,
             });
         });
 };
 
-module.exports = { getAllTasks, addNewTask, deleteTask };
+const completeTask = (req, res, next) => {
+    const taskId = req.params.taskId;
+    const is_completed = req.body.is_completed;
+    // créer la query SQL pour supprimer la ligne
+    const completeTodoQuery = `UPDATE tasks SET is_completed = ${is_completed} where task_id = ${taskId} RETURNING *;`
+    // exécuter la query
+    db.one(completeTodoQuery)
+        .then((resp) => res.status(200).json(`Todo mise à jour : todo désormais ${resp.is_completed ? "effectué" : "encore à effectuer"}`))
+        .catch((error) => {
+            // console.log("ERROR:", error);
+            next({
+                message: "Impossible d'updater le todo.",
+                statusCode: 404,
+            });
+        });
+}
+
+module.exports = { getAllTasks, addNewTask, deleteTask, completeTask };
