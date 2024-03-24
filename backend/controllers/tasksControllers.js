@@ -9,9 +9,8 @@ const db = pgp({
 });
 
 const getAllTasks = (req, res, next) => {
-    db.any("SELECT * from tasks")
+    db.any("SELECT * from tasks ORDER BY deadline;")
         .then((data) => {
-            console.log("DATA:", data);
             res.status(200).json(data);
         })
         .catch((error) => {
