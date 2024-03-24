@@ -19,8 +19,11 @@ services:
     depends_on:
       - db
     ports:
-        - 3000:3000
-  
+      - 3000:3000
+    volumes:
+      - ./backend/:/usr/src/app/
+      - /usr/src/app/node_modules
+
   frontend:
     build: frontend/
     depends_on:
