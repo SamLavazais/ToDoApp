@@ -1,13 +1,10 @@
 FROM node:21-slim
 
-WORKDIR /App
-
-COPY package.json .
-COPY package-lock.json .
-
-RUN npm install
+WORKDIR /usr/src/app
 
 COPY . .
+
+RUN npm install
 
 CMD [ "npm", "run", "dev" ]
 
