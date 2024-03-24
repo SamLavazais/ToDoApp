@@ -22,7 +22,7 @@ const getAllTasks = (req, res, next) => {
         });
 };
 
-const addNewTask = (req, res, next) => {
+const createTask = (req, res, next) => {
     const newToDo = req.body;
     // placer les paramètres du body dans la requête //TODO paramétrer le user_id
     const createTodoQuery = `INSERT INTO tasks (title, category, deadline, is_important, details, user_id)
@@ -49,7 +49,7 @@ const deleteTask = (req, res, next) => {
     db.one(deleteToDoQuery)
         .then(() => res.status(200).json("todo supprimé !"))
         .catch((error) => {
-            // console.log("ERROR:", error);
+            console.log("ERROR:", error);
             next({
                 message: "Impossible de supprimer le todo.",
                 statusCode: 404,
@@ -74,4 +74,4 @@ const completeTask = (req, res, next) => {
         });
 }
 
-module.exports = { getAllTasks, addNewTask, deleteTask, completeTask };
+module.exports = { getAllTasks, createTask, deleteTask, completeTask };

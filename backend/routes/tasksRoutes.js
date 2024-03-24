@@ -1,7 +1,7 @@
 const express = require("express");
 const {
     getAllTasks,
-    addNewTask,
+    createTask,
     deleteTask,
     completeTask,
 } = require("../controllers/tasksControllers");
@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/", getAllTasks);
 
-router.post("/", addNewTask);
+router.post("/", createTask);
 
 router.put("/:taskId", completeTask);
 
