@@ -8,7 +8,8 @@ const db = pgp({
     password: process.env.DB_PASSWORD,
 });
 
-const getTasks = (req, res, next) => {
+// obtenir la liste des tâches
+const getAllTasks = (req, res, next) => {
     db.any("SELECT * from tasks")
         .then((data) => {
             console.log("DATA:", data);
@@ -23,4 +24,15 @@ const getTasks = (req, res, next) => {
         });
 };
 
-module.exports = { getTasks };
+// créer un seul todo
+const addNewTask = (req, res, next) => {
+    const newToDo = req.body;
+    // placer les paramètres du body dans la requête //TODO paramétrer le user_id
+    const createTodoQuery = `INSERT INTO tasks (title, category, deadline, is_important, details, user_id)
+                            VALUES ('${newToDo.title}', '${newToDo.category}', '${newToDo.deadline}'::date, ${newToDo.is_important}, '', 99) RETURNING task_id ;`;
+    db.one(createTodoQuery).then((resp) =>
+        res.status(201).json(`Le todo ${resp.task_id} a bien été créé !`)
+    );
+};
+
+module.exports = { getAllTasks, addNewTask };

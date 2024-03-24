@@ -16,8 +16,8 @@ app.use((req, res, next) => {
 });
 
 //Middleware pour gérer les données au format json et les url encodées (POST & PUT)
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 // alternative :
 // const bodyParser = require("body-parser");
 // app.use(bodyParser.urlencoded({ extended: true }));
