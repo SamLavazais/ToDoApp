@@ -9,14 +9,14 @@ is_completed bool
 deadline date
 is_important bool
 description string
-user_id int FK >- Users.userId
+user_id int FK >- Users.user_id
 
 Subtasks
 -
 subtask_id int PK
 title string
 is_completed bool
-task_id int FK >- Tasks.taskId
+task_id int FK >- Tasks.task_id
 
 Users
 -

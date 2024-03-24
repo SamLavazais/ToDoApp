@@ -21,8 +21,8 @@
 
 - Serveur Node-Express
 - *(en cours)* Route "/tasks" avec multiples endpoints pour opérations CRUD sur les todos 
+    *Avancement actuel : 2 endpoint (GET tasks pour récupérer tous les todos / POST tasks pour créer un todo)*
 - Controllers exécutant les requêtes à la DB et retournant la réponse sous format JSON
-    *Avancement actuel : un seul endpoint GET + controller getAllTasks pour récupérer toutes les todos*
 - Connexion au serveur PostGreSQL + requêtes PSQL grâce au package pg-promise
 - Gestionnaire d'erreurs via middlewares dédiés
 
