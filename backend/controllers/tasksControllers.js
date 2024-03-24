@@ -43,4 +43,21 @@ const addNewTask = (req, res, next) => {
         });
 };
 
-module.exports = { getAllTasks, addNewTask };
+const deleteTask = (req, res, next) => {
+    // récupère l'id du todo qu'on veut supprimer
+    const taskId = req.params.taskId;
+    // créer la query SQL pour supprimer la ligne
+    const deleteToDoQuery = `DELETE FROM tasks where tasks.task_id = ${taskId} RETURNING *;`;
+    // exécuter la query
+    db.one(deleteToDoQuery)
+        .then(() => res.status(200).json("todo supprimé !"))
+        .catch((error) => {
+            // console.log("ERROR:", error);
+            next({
+                message: "Impossible de supprimer le todo (id introuvable).",
+                statusCode: 404,
+            });
+        });
+};
+
+module.exports = { getAllTasks, addNewTask, deleteTask };
