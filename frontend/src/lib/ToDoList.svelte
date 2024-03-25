@@ -1,25 +1,15 @@
 <script>
     import ToDoRow from "./ToDoRow.svelte";
-    export let filters;
+    export let tasksList;
 
-    async function getAllTasks() {
-        let promise = await fetch("http://localhost:3000/tasks");
-        console.log("resp: ", promise);
-        let data = await promise.json();
-        console.log("données : ", data);
-        return data;
-    }
-    let promise = getAllTasks();
+    // export let filters;
+    $: tasksListToDisplay = tasksList.slice(0);
 </script>
 
 <div id="tasksListBox">
-    {#await promise then tasksList}
-        {#each tasksList as task}
-            {#if !filters.toDo || (filters.toDo && !task.is_completed)}
-                <ToDoRow {task} />
-            {/if}
-        {/each}
-    {/await}
+    {#each tasksListToDisplay.slice(0, 10) as task}
+        <ToDoRow {task} on:delete />
+    {/each}
 </div>
 
 <style>
