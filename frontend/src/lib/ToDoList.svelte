@@ -7,8 +7,8 @@
 </script>
 
 <div id="tasksListBox">
-    {#each tasksListToDisplay.slice(0, 10) as task}
-        <ToDoRow {task} on:delete />
+    {#each tasksListToDisplay as task}
+        <ToDoRow {task} on:delete on:complete />
     {/each}
 </div>
 
