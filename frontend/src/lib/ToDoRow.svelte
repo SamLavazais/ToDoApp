@@ -1,5 +1,14 @@
 <script>
+    import { createEventDispatcher } from "svelte";
     export let task;
+
+    const dispatch = createEventDispatcher();
+
+    function deleteTask() {
+        dispatch("delete", {
+            task_id: task.task_id,
+        });
+    }
 </script>
 
 <div class="todoRow {task.is_completed ? 'isDone' : ''}">
@@ -7,12 +16,13 @@
     <div class="todoTitle">{task.title}</div>
     <div class="todoCat">{task.category ?? "no category"}</div>
     <div class="todoDeadline">{task.deadline ?? "no deadline"}</div>
+    <button on:click={deleteTask}>X</button>
 </div>
 
 <style>
     .todoRow {
         display: grid;
-        grid-template-columns: 1fr 7fr 1fr 1fr;
+        grid-template-columns: 1fr 7fr 1fr 1fr 1fr;
         column-gap: 1em;
         align-items: center;
 
