@@ -5,8 +5,8 @@
 <div class="todoRow {task.is_completed ? 'isDone' : ''}">
     <input type="checkbox" class="checkBox" bind:checked={task.is_completed} />
     <div class="todoTitle">{task.title}</div>
-    <div class="todoCat">{task.category ?? "categorie"}</div>
-    <div class="todoDeadline">{task.deadline ?? "deadline"}</div>
+    <div class="todoCat">{task.category ?? "no category"}</div>
+    <div class="todoDeadline">{task.deadline ?? "no deadline"}</div>
 </div>
 
 <style>
