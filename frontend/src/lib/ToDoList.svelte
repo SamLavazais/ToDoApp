@@ -1,5 +1,4 @@
 <script>
-    import TasksList from "../classes/TasksList";
     import ToDoRow from "./ToDoRow.svelte";
     export let filters;
 
@@ -8,15 +7,14 @@
         console.log("resp: ", promise);
         let data = await promise.json();
         console.log("données : ", data);
-        console.log(new TasksList(data));
-        return new TasksList(data);
+        return data;
     }
     let promise = getAllTasks();
 </script>
 
 <div id="tasksListBox">
     {#await promise then tasksList}
-        {#each tasksList.tasks as task}
+        {#each tasksList as task}
             {#if !filters.toDo || (filters.toDo && !task.is_completed)}
                 <ToDoRow {task} />
             {/if}
