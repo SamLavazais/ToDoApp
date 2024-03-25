@@ -9,10 +9,23 @@
             task_id: task.task_id,
         });
     }
+
+    function completeTask() {
+        alert(`la tâche est désormais ${!task.is_completed}`);
+        dispatch("complete", {
+            is_completed: !task.is_completed,
+            task_id: task.task_id,
+        });
+    }
 </script>
 
 <div class="todoRow {task.is_completed ? 'isDone' : ''}">
-    <input type="checkbox" class="checkBox" bind:checked={task.is_completed} />
+    <input
+        type="checkbox"
+        class="checkBox"
+        on:click={completeTask}
+        bind:checked={task.is_completed}
+    />
     <div class="todoTitle">{task.title}</div>
     <div class="todoCat">{task.category ?? "no category"}</div>
     <div class="todoDeadline">{task.deadline ?? "no deadline"}</div>
