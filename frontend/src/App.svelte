@@ -1,7 +1,8 @@
 <script>
     import Filters from "./lib/Filters.svelte";
+    import NewTodo from "./lib/NewTodo.svelte";
     import ToDoList from "./lib/ToDoList.svelte";
-    import { getAllTasks, deleteTask, completeTask } from "./lib/apiRequests";
+    import { getAllTasks, deleteTask, completeTask, createTask } from "./lib/apiRequests";
     import Header from "./lib/header.svelte";
 
     let tasksListPromise = getAllTasks();
@@ -11,7 +12,14 @@
     }
 
     function handleComplete(event) {
-        tasksListPromise = completeTask(event.detail.task_id, event.detail.is_completed);
+        tasksListPromise = completeTask(
+            event.detail.task_id,
+            event.detail.is_completed
+        );
+    }
+
+    function handleCreate() {
+        tasksListPromise = createTask();
     }
 
     // let filters = { toDo: false}
@@ -24,9 +32,8 @@
     <Header />
     <Filters />
     <!-- on:filters={handleFilters} -->
-    {#await tasksListPromise}
-        <div>Les tâches sont en train de charger...</div>
-    {:then tasksList}
+    <NewTodo on:create={handleCreate} />
+    {#await tasksListPromise then tasksList}
         <ToDoList
             {tasksList}
             on:delete={handleDelete}

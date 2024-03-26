@@ -26,3 +26,7 @@ export async function completeTask(task_id, is_completed) {
     // update fetch GET
     return getAllTasks();
 }
+
+export async function createTask() {
+    return getAllTasks();
+}
