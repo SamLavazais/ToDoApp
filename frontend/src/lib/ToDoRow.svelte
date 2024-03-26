@@ -11,7 +11,6 @@
     }
 
     function completeTask() {
-        alert(`la tâche est désormais ${!task.is_completed}`);
         dispatch("complete", {
             is_completed: !task.is_completed,
             task_id: task.task_id,
@@ -29,7 +28,7 @@
     <div class="todoTitle">{task.title}</div>
     <div class="todoCat">{task.category ?? "no category"}</div>
     <div class="todoDeadline">{task.deadline ?? "no deadline"}</div>
-    <button on:click={deleteTask}>X</button>
+    <button on:click|stopPropagation|self={deleteTask}>X</button>
 </div>
 
 <style>

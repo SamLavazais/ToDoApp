@@ -18,8 +18,8 @@
         );
     }
 
-    function handleCreate() {
-        tasksListPromise = createTask();
+    function handleCreate(event) {
+        tasksListPromise = createTask(event.detail.newTask);
     }
 
     // let filters = { toDo: false}
