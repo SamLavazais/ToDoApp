@@ -2,11 +2,13 @@ FROM node:18-slim
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY package.json package.json
+COPY package-lock.json package-lock.json
 
 RUN npm install
-# RUN node config/configDB.js
 
-CMD [ "node", "server.js" ]
+COPY . .
+
+CMD [ "npm", "start" ]
 
 EXPOSE 3000
